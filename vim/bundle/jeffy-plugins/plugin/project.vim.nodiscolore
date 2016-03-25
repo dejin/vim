@@ -124,7 +124,7 @@ function! s:ProjectCreate()
 
     " create tags file
     if executable('ctags')
-        "dejin call system('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -o ' . g:project_data . '/tags ' . getcwd())
+        call system('ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -o ' . g:project_data . '/tags ' . getcwd())
     else
         call s:WarnMsg("command 'ctags' not exist.")
         return -1
@@ -132,7 +132,7 @@ function! s:ProjectCreate()
 
     " create cscope file
     if executable('cscope')
-        call system('cscope -Rbqk -f' . g:project_data . "/cstags")
+        call system('cscope -Rbqk -f' . g:project_data . "/cscope.out")
     else
         call s:WarnMsg("command 'cscope' not exist.")
         return -1
@@ -152,7 +152,7 @@ function! s:ProjectUpdate()
     if proj_data == ''
         return
     endif
-    exe 'cd ' . proj_data . "/.."
+    exe 'cd ' . proj_data
 
     " create tags file
     if executable('ctags')
@@ -164,14 +164,14 @@ function! s:ProjectUpdate()
 
     " create cscope file
     if executable('cscope')
-        call system('cscope -Rbqk -f' . proj_data . "/cstags")
+        call system('cscope -Rbqk -f' . proj_data . "/cscope.out")
     else
         call s:WarnMsg("command 'cscope' not exist.")
         return -1
     endif
 
-    "dejin call s:HLUDSync(proj_data . '/tags', proj_data . '/udtags')
-    "dejin call s:HLUDColor()
+    "call s:HLUDSync(proj_data . '/tags', proj_data . '/udtags')
+    "call s:HLUDColor()
     echo "update project done."
     return 1
 endfunction
@@ -184,24 +184,24 @@ function! s:ProjectLoad()
     if proj_data == ''
         return
     endif
-    exe 'cd ' . proj_data . "/.."
+    exe 'cd ' . proj_data
 
     " load tags.
     let &tags = proj_data . '/tags,' . &tags
 
     " load cscope.
-    if filereadable(proj_data . '/cstags')
+    if filereadable(proj_data . '/cscope.out')
         set csto=1
         set cst
         set nocsverb
-        exe 'cs add ' . proj_data . '/cstags'
+        exe 'cs add ' . proj_data . '/cscope.out'
         cs reset
         set csverb
     endif
 
     " color user defined.
-    "dejin call s:HLUDLoad(proj_data . '/udtags')
-    "dejin call s:HLUDColor()
+    "call s:HLUDLoad(proj_data . '/udtags')
+    "call s:HLUDColor()
 
     echon "load project done."
     return 1
