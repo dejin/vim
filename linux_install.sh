@@ -1,4 +1,4 @@
-rm -f ~/.vim
+rm -rf ~/.vim
 rm -f ~/.vimrc
 
 ln -s $PWD/vim ~/.vim
