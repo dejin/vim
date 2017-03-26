@@ -73,9 +73,9 @@ function! s:HLUDColor()
 	exec 'syn keyword cUserTypes X_X_X ' . s:HLUDGetTags('t') . s:HLUDGetTags('u') .  s:HLUDGetTags('s') . s:HLUDGetTags('g')
 	exec 'syn keyword cUserDefines X_X_X ' . s:HLUDGetTags('d') . s:HLUDGetTags('e')
 	exec 'syn keyword cUserFunctions X_X_X ' . s:HLUDGetTags('f') . s:HLUDGetTags('p')
-    exec 'hi cUserTypes ctermfg=blue guifg=blue'
+    exec 'hi cUserTypes ctermfg=green guifg=green'
     exec 'hi cUserDefines ctermfg=red guifg=red'
-    exec 'hi cUserFunctions ctermfg=green guifg=green'
+    exec 'hi cUserFunctions ctermfg=magenta guifg=magenta'
 endfunction
 
 " HLUDSync                      {{{1
@@ -141,7 +141,7 @@ function! s:ProjectCreate()
         return -1
     endif
 
-    call s:HLUDSync(g:project_data . '/tags', g:project_data . '/udtags')
+    "call s:HLUDSync(g:project_data . '/tags', g:project_data . '/udtags')
     echon "create project done, "
     call s:ProjectLoad()
     return 1
@@ -155,8 +155,8 @@ function! s:ProjectCreatedj()
     if !isdirectory(g:project_data)
         call mkdir(g:project_data, "p")
     endif
-    call system('export ARCH=arm64 && make tags && make cscope')
-    call s:HLUDSync(g:project_data . '/tags', g:project_data . '/udtags')
+    call system('make tags && make cscope')
+    "call s:HLUDSync(g:project_data . '/tags', g:project_data . '/udtags')
     echon "create projectdj done, "
     call s:ProjectLoad()
     return 1
@@ -189,8 +189,8 @@ function! s:ProjectUpdate()
         return -1
     endif
 
-    call s:HLUDSync(proj_data . '/tags', proj_data . '/udtags')
-    call s:HLUDColor()
+    "call s:HLUDSync(proj_data . '/tags', proj_data . '/udtags')
+    "call s:HLUDColor()
     echo "update project done."
     return 1
 endfunction
@@ -219,8 +219,8 @@ function! s:ProjectLoad()
     endif
 
     " color user defined.
-    call s:HLUDLoad(proj_data . '/udtags')
-    call s:HLUDColor()
+    "call s:HLUDLoad(proj_data . '/udtags')
+    "call s:HLUDColor()
 
     echon "load project done."
     return 1
