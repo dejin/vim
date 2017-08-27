@@ -54,6 +54,7 @@ set fileformat=unix
 
 set background=dark
 colorscheme vividchalk
+set cursorline
 
 " gui settings
 if has("gui_running")
@@ -137,7 +138,7 @@ let MRU_Window_Height = 10
 nmap <Leader>r :MRU<cr>
 
 " taglist
-let g:Tlist_WinWidth = 25
+let g:Tlist_WinWidth = 30
 let g:Tlist_Use_Right_Window = 0
 let g:Tlist_Auto_Update = 1
 let g:Tlist_Process_File_Always = 1
@@ -150,7 +151,7 @@ nmap <Leader>t :TlistToggle<cr>
 
 " nerdtree
 let g:NERDTreeWinPos = "right"
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize = 40
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 1
 nmap <Leader>f :NERDTreeToggle<CR>
@@ -173,6 +174,9 @@ nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
 nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
 nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
+
+" grep
+nmap <leader>g :Grep  <C-R>=expand("<cword>") ./* -rw<CR><CR><CR>
 
 " vimgdb.vim
 if has("gdb")
