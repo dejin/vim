@@ -223,10 +223,10 @@ endfunction
 
 " }}}
 
-command! -nargs=0 -complete=file ProjectCreate call s:ProjectCreate()
-command! -nargs=0 -complete=file ProjectUpdate call s:ProjectUpdate()
-command! -nargs=0 -complete=file ProjectLoad call s:ProjectLoad()
-command! -nargs=0 -complete=file ProjectQuit call s:ProjectQuit()
+command! -nargs=0 -bar ProjectCreate call s:ProjectCreate()
+command! -nargs=0 -bar ProjectUpdate call s:ProjectUpdate()
+command! -nargs=0 -bar ProjectLoad call s:ProjectLoad()
+command! -nargs=0 -bar ProjectQuit call s:ProjectQuit()
 
 aug Project
     au VimEnter * call s:ProjectLoad()
